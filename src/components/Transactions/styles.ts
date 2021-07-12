@@ -27,6 +27,13 @@ export const TransactionsContainer = styled.div `
                 }
             }
         }
+    .withdraw {
+        color: var(--red);
+    }
+    .deposit {
+        color: var(--green);
+    }
+    .
 `
 
 export const TransactionItem = styled.tr `

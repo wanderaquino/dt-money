@@ -73,7 +73,7 @@ export const GlobalStyle = createGlobalStyle `
         position: relative;
         border-radius: 0.25rem;
 
-        button[type='button'] {
+        button.modal-close-button {
             position: absolute;
             margin-right: 1.5rem;
             margin-top: 1.5rem;

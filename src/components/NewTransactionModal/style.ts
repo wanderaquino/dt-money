@@ -1,5 +1,5 @@
+import { type } from "os";
 import styled from "styled-components";
-
 
 export const NewTransactionModalContainer = styled.form `
     h2 {
@@ -48,3 +48,23 @@ export const NewTransactionModalContainer = styled.form `
     }
 
 `;
+
+export const TransactionTypeContainer = styled.div `
+    display: flex;
+    gap: 1rem;
+`
+
+export const TransactionTypeButton = styled.button.attrs(
+    props => ({})) `
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        flex: 1;
+        border: 1px solid #D7D7D7;
+        margin: 1rem 0;
+        padding: 1rem .5rem;
+        border-radius: .3rem;
+        background: ${props => props.color || 'none'}
+
+`

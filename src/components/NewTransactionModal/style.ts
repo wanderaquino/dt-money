@@ -51,30 +51,31 @@ export const NewTransactionModalContainer = styled.form `
 export const TransactionTypeContainer = styled.div `
     display: flex;
     gap: 1rem;
+`
 
-    button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        flex: 1;
-        border: 1px solid #D7D7D7;
-        margin: 1rem 0;
-        padding: 1rem .5rem;
-        border-radius: .3rem;
-        background: transparent;
-        z-index: 1;
+export const TransactionTypeButton = styled.button`
 
-        &:hover {
-            border-color: #aaa;
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    border: 1px solid #D7D7D7;
+    margin: 1rem 0;
+    padding: 1rem .5rem;
+    border-radius: .3rem;
+    background: transparent;
+    z-index: 1;
+
+    &:hover {
+        border-color: #aaa;
     }
 
-    .income-selected {
-        background: var(--light-green)
+    &.income-selected {
+        background: var(--light-green);
     }
 
-    .outcome-selected {
-        background: var(--light-red)
+    &.outcome-selected {
+        background: var(--light-red);
     }
 `

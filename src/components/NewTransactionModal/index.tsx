@@ -1,4 +1,4 @@
-import { NewTransactionModalContainer, TransactionTypeContainer } from "./style";
+import { NewTransactionModalContainer, TransactionTypeContainer, TransactionTypeButton } from "./style";
 import Modal from "react-modal";
 import closeImg from "../../assets/images/close.svg";
 import incomeImg from "../../assets/images/entradas.svg";
@@ -37,21 +37,21 @@ export function NewTransactionModal({isOpenModal,onRequestCloseModal}:NewTransac
                 <input type="text" placeholder="Nome"/>
                 <input type="text" placeholder="Valor"/>
                 <TransactionTypeContainer>
-                    <button
+                    <TransactionTypeButton
                         type="button"
                         onClick={handleSelectIncomeTransactionType}
                         className={transactionType === 'deposit' ? 'income-selected' : ""}
                     >
                             <img src={incomeImg} alt="Imagem para entrada financeira"/>
                         Entrada
-                    </button>
-                    <button
+                    </TransactionTypeButton>
+                    <TransactionTypeButton
                         type="button"
                         onClick={handleSelectOutcomeTransactionType}
                         className={transactionType === 'withdraw' ? 'outcome-selected' : ""}>
                             <img src={outcomeImg} alt="Imagem para saída financeira"/>
                         Saída
-                    </button>
+                    </TransactionTypeButton>
                 </TransactionTypeContainer>
 
                 <input type="text" placeholder="Categoria"/>

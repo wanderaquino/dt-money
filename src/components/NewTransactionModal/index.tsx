@@ -1,9 +1,9 @@
-import { NewTransactionModalContainer, TransactionTypeButton, TransactionTypeContainer } from "./style";
+import { NewTransactionModalContainer, TransactionTypeContainer } from "./style";
 import Modal from "react-modal";
 import closeImg from "../../assets/images/close.svg";
 import incomeImg from "../../assets/images/entradas.svg";
 import outcomeImg from "../../assets/images/saidas.svg";
-import { MouseEventHandler, useState } from "react";
+import { useState } from "react";
 
 interface NewTransactionModalProps {
     isOpenModal: boolean,
@@ -12,16 +12,14 @@ interface NewTransactionModalProps {
 export function NewTransactionModal({isOpenModal,onRequestCloseModal}:NewTransactionModalProps) {
     const [transactionType, setTrasactionType] = useState("");
 
-    const lightGreen = "#CFF9E2";
-    const lightRed = "#F9CFCF"; 
-
-    function handleSelectIncomeTransactionType () {
-        setTrasactionType('income');
+    function handleSelectIncomeTransactionType (){
+        setTrasactionType('deposit');
         console.log(transactionType);
     }
 
     function handleSelectOutcomeTransactionType () {
-        setTrasactionType('outcome');
+        setTrasactionType('withdraw');
+        console.log(transactionType);
     }
 
     return (
@@ -32,25 +30,30 @@ export function NewTransactionModal({isOpenModal,onRequestCloseModal}:NewTransac
             className="react-modal-content"
         >
             <NewTransactionModalContainer>
-                <button type="button" onClick={onRequestCloseModal}>
+                <button type="button" className={"modal-close-button"} onClick={onRequestCloseModal}>
                     <img src={closeImg} alt="Fechar Modal"></img>
                 </button>
                 <h2>Cadastrar Transação</h2>
                 <input type="text" placeholder="Nome"/>
                 <input type="text" placeholder="Valor"/>
                 <TransactionTypeContainer>
-
-                    <TransactionTypeButton onClick={e => {e.preventDefault(); handleSelectIncomeTransactionType()}}>
-                            <img src={incomeImg} alt ="Ícone de Entrada Financeira"></img>
-                            Entrada
-                    </TransactionTypeButton>
-
-                    <TransactionTypeButton onClick={e => {e.preventDefault(); handleSelectOutcomeTransactionType()}}>
-                            <img src={outcomeImg} alt="Ícone de saída Financeira"></img>
-                            Saída
-                    </TransactionTypeButton>
-
+                    <button
+                        type="button"
+                        onClick={handleSelectIncomeTransactionType}
+                        className={transactionType === 'deposit' ? 'income-selected' : ""}
+                    >
+                            <img src={incomeImg} alt="Imagem para entrada financeira"/>
+                        Entrada
+                    </button>
+                    <button
+                        type="button"
+                        onClick={handleSelectOutcomeTransactionType}
+                        className={transactionType === 'withdraw' ? 'outcome-selected' : ""}>
+                            <img src={outcomeImg} alt="Imagem para saída financeira"/>
+                        Saída
+                    </button>
                 </TransactionTypeContainer>
+
                 <input type="text" placeholder="Categoria"/>
                 <button type="submit">Cadastrar</button>
             </NewTransactionModalContainer>

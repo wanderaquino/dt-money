@@ -1,4 +1,3 @@
-import { type } from "os";
 import styled from "styled-components";
 
 export const NewTransactionModalContainer = styled.form `
@@ -52,10 +51,8 @@ export const NewTransactionModalContainer = styled.form `
 export const TransactionTypeContainer = styled.div `
     display: flex;
     gap: 1rem;
-`
 
-export const TransactionTypeButton = styled.button.attrs(
-    props => ({})) `
+    button {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -65,6 +62,19 @@ export const TransactionTypeButton = styled.button.attrs(
         margin: 1rem 0;
         padding: 1rem .5rem;
         border-radius: .3rem;
-        background: ${props => props.color || 'none'}
+        background: transparent;
+        z-index: 1;
 
+        &:hover {
+            border-color: #aaa;
+        }
+    }
+
+    .income-selected {
+        background: var(--light-green)
+    }
+
+    .outcome-selected {
+        background: var(--light-red)
+    }
 `

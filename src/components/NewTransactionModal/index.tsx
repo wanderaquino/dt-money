@@ -11,6 +11,8 @@ interface NewTransactionModalProps {
 }
 export function NewTransactionModal({isOpenModal,onRequestCloseModal}:NewTransactionModalProps) {
     const [transactionType, setTrasactionType] = useState("");
+    const incomeColor = "light-green";
+    const outcomeColor = "light-red";
 
     function handleSelectIncomeTransactionType (){
         setTrasactionType('deposit');
@@ -40,7 +42,7 @@ export function NewTransactionModal({isOpenModal,onRequestCloseModal}:NewTransac
                     <TransactionTypeButton
                         type="button"
                         onClick={handleSelectIncomeTransactionType}
-                        className={transactionType === 'deposit' ? 'income-selected' : ""}
+                        color={transactionType === 'deposit' ? incomeColor : ""}
                     >
                             <img src={incomeImg} alt="Imagem para entrada financeira"/>
                         Entrada
@@ -48,7 +50,7 @@ export function NewTransactionModal({isOpenModal,onRequestCloseModal}:NewTransac
                     <TransactionTypeButton
                         type="button"
                         onClick={handleSelectOutcomeTransactionType}
-                        className={transactionType === 'withdraw' ? 'outcome-selected' : ""}>
+                        color={transactionType === 'withdraw' ? outcomeColor : ""}>
                             <img src={outcomeImg} alt="Imagem para saída financeira"/>
                         Saída
                     </TransactionTypeButton>

@@ -53,7 +53,13 @@ export const TransactionTypeContainer = styled.div `
     gap: 1rem;
 `
 
-export const TransactionTypeButton = styled.button`
+interface TrasactionButtonProps {
+    color: string
+}
+
+
+
+export const TransactionTypeButton = styled.button<TrasactionButtonProps>`
 
     display: flex;
     justify-content: center;
@@ -64,7 +70,7 @@ export const TransactionTypeButton = styled.button`
     margin: 1rem 0;
     padding: 1rem .5rem;
     border-radius: .3rem;
-    background: transparent;
+    background: ${props => `var(--${props.color})`};
     z-index: 1;
 
     &:hover {
@@ -72,7 +78,7 @@ export const TransactionTypeButton = styled.button`
     }
 
     &.income-selected {
-        background: var(--light-green);
+        background: 
     }
 
     &.outcome-selected {

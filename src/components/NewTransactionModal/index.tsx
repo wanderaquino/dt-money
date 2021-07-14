@@ -1,19 +1,28 @@
 import { NewTransactionModalContainer, TransactionTypeContainer, TransactionTypeButton } from "./style";
+import {TransactionsContext} from "../../TransactionsContext";
 import Modal from "react-modal";
 import closeImg from "../../assets/images/close.svg";
 import incomeImg from "../../assets/images/entradas.svg";
 import outcomeImg from "../../assets/images/saidas.svg";
-import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
-import { api } from "../../services/api";
+import { useContext, ChangeEvent, FormEvent, MouseEvent, useState } from "react";
 
 interface NewTransactionModalProps {
     isOpenModal: boolean,
     onRequestCloseModal: () => void
 };
 
+interface Transaction {
+    name: string,
+    type: string,
+    amount: number,
+    category: string,
+}
+
+
 export function NewTransactionModal({isOpenModal,onRequestCloseModal}:NewTransactionModalProps) {
     const [transactionType, setTrasactionType] = useState("");
-    const [newTransaction, setNewTransaction] = useState({}); 
+    const [newTransaction, setNewTransaction] = useState<Transaction>({} as Transaction); 
+    const {createTransaction} = useContext(TransactionsContext);
 
     function handleSelectTransactionType (e: MouseEvent<HTMLButtonElement>){
         const transactionType = e.currentTarget.name;
@@ -25,15 +34,14 @@ export function NewTransactionModal({isOpenModal,onRequestCloseModal}:NewTransac
         e.preventDefault();
         const date = new Intl.DateTimeFormat('pt-BR').format(new Date());
         setNewTransaction((previousState) => ({...previousState,createdAt: date}));
-        api.post("/transactions", newTransaction);
+        createTransaction(newTransaction)
+        // api.post("/transactions", newTransaction);
     }
 
     function handleChangeInput(e:ChangeEvent<HTMLInputElement>) {
         const inputName = e.target.name;
         const value = e.target.value;
-        
         setNewTransaction((previousState) => ({...previousState,[inputName]: value}))
-
     }
 
     function handleChangeTransactionValue(e:ChangeEvent<HTMLInputElement>) {

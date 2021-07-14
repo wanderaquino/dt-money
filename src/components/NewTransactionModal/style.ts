@@ -54,10 +54,14 @@ export const TransactionTypeContainer = styled.div `
 `
 
 interface TrasactionButtonProps {
-    color: string
+    color: "green" | "red" | "transparent"
 }
 
-
+const colors = {
+    green: "#CFF9E2",
+    red: "#F9CFCF",
+    transparent: "transparent"
+}
 
 export const TransactionTypeButton = styled.button<TrasactionButtonProps>`
 
@@ -70,7 +74,7 @@ export const TransactionTypeButton = styled.button<TrasactionButtonProps>`
     margin: 1rem 0;
     padding: 1rem .5rem;
     border-radius: .3rem;
-    background: ${props => `var(--${props.color})`};
+    background: ${props => colors[props.color]};
     z-index: 1;
 
     &:hover {

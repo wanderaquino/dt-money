@@ -1,5 +1,5 @@
 import { TransactionsContext } from "../../TransactionsContext";
-import { useContext } from "react";
+import { useContext} from "react";
 import { TransactionsContainer } from "./styles";
 
 export function Transactions () {
@@ -30,7 +30,7 @@ export function Transactions () {
                     </td>
                     <td>{transaction.category}</td>
                     <td>
-                        {new Intl.DateTimeFormat("pt-BR", {dateStyle: "short"}).format(new Date(transaction.createdAt))}
+                        {transaction.createdAt}
                     </td>
                 </tr>))}
             </tbody>

@@ -3,7 +3,8 @@ import Modal from "react-modal";
 import closeImg from "../../assets/images/close.svg";
 import incomeImg from "../../assets/images/entradas.svg";
 import outcomeImg from "../../assets/images/saidas.svg";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
+import { api } from "../../services/api";
 
 interface NewTransactionModalProps {
     isOpenModal: boolean,
@@ -11,25 +12,19 @@ interface NewTransactionModalProps {
 }
 export function NewTransactionModal({isOpenModal,onRequestCloseModal}:NewTransactionModalProps) {
     const [transactionType, setTrasactionType] = useState("");
-    const [transactionValue, setTransactionValue] = useState(0);
-    const [newTransaction, setNewTransaction] = useState({});
+    const [newTransaction, setNewTransaction] = useState({}); 
 
-    function handleSelectIncomeTransactionType (){
-        setTrasactionType("deposit");
-    }
-
-    function handleSelectOutcomeTransactionType () {
-        setTrasactionType('withdraw');
+    function handleSelectTransactionType (e: MouseEvent<HTMLButtonElement>){
+        const transactionType = e.currentTarget.name;
+        setTrasactionType(transactionType);
+        setNewTransaction((previousState) => ({...previousState,type:transactionType}));
     }
 
     function handleSubmitNewTransaction (e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        console.log(transactionType);
-        const type = transactionType;
-        console.log(type);
-        setNewTransaction((previousState) => ({...previousState,type}));
-
-        console.log(newTransaction);
+        const date = new Intl.DateTimeFormat('pt-BR').format(new Date());
+        setNewTransaction((previousState) => ({...previousState,createdAt: date}));
+        api.post("/transactions", newTransaction);
     }
 
     function handleChangeInput(e:ChangeEvent<HTMLInputElement>) {
@@ -63,7 +58,8 @@ export function NewTransactionModal({isOpenModal,onRequestCloseModal}:NewTransac
                 <TransactionTypeContainer>
                     <TransactionTypeButton
                         type="button"
-                        onClick={handleSelectIncomeTransactionType}
+                        name="deposit"
+                        onClick={e => handleSelectTransactionType(e)}
                         color={transactionType === 'deposit' ? "green" : "transparent"}
                     >
                             <img src={incomeImg} alt="Imagem para entrada financeira"/>
@@ -71,7 +67,8 @@ export function NewTransactionModal({isOpenModal,onRequestCloseModal}:NewTransac
                     </TransactionTypeButton>
                     <TransactionTypeButton
                         type="button"
-                        onClick={handleSelectOutcomeTransactionType}
+                        name="withdraw"
+                        onClick={e => handleSelectTransactionType(e)}
                         color={transactionType === 'withdraw' ? "red" : "transparent"}>
                             <img src={outcomeImg} alt="Imagem para saída financeira"/>
                         Saída

@@ -20,16 +20,13 @@ export function App() {
       setIsTransactionModalOpened(false);
   }
   return (
-    <>
+    <TransactionsProvider>
       <GlobalStyle />
-      <TransactionsProvider>
-        <Header onOpenNewTrasactionModal={handleOpenTransactionModal} />
-        <Dashboard />
-        <NewTransactionModal 
-          isOpenModal={isTransactionModalOpened}
-          onRequestCloseModal={handleCloseTransactionModal}
-        />
-      </TransactionsProvider>
-    </>
+      <Header onOpenNewTrasactionModal={handleOpenTransactionModal} />
+      <Dashboard />
+      <NewTransactionModal
+        isOpenModal={isTransactionModalOpened}
+        onRequestCloseModal={handleCloseTransactionModal}/>
+    </TransactionsProvider>
   );
 }

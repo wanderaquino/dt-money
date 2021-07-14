@@ -16,13 +16,21 @@ interface Transaction {
     type: string,
     amount: number,
     category: string,
+    createdAt: string
 }
 
+const defaultState = {
+    name: "",
+    type: "",
+    amount: 0,
+    category: ""
+}
 
 export function NewTransactionModal({isOpenModal,onRequestCloseModal}:NewTransactionModalProps) {
     const [transactionType, setTrasactionType] = useState("");
     const [newTransaction, setNewTransaction] = useState<Transaction>({} as Transaction); 
     const {createTransaction} = useContext(TransactionsContext);
+
 
     function handleSelectTransactionType (e: MouseEvent<HTMLButtonElement>){
         const transactionType = e.currentTarget.name;
@@ -30,12 +38,11 @@ export function NewTransactionModal({isOpenModal,onRequestCloseModal}:NewTransac
         setNewTransaction((previousState) => ({...previousState,type:transactionType}));
     }
 
-    function handleSubmitNewTransaction (e: FormEvent<HTMLFormElement>) {
+   async function handleSubmitNewTransaction (e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const date = new Intl.DateTimeFormat('pt-BR').format(new Date());
-        setNewTransaction((previousState) => ({...previousState,createdAt: date}));
-        createTransaction(newTransaction)
-        // api.post("/transactions", newTransaction);
+        await createTransaction(newTransaction);
+        setNewTransaction(prevState => ({...prevState, defaultState}))
+        onRequestCloseModal();
     }
 
     function handleChangeInput(e:ChangeEvent<HTMLInputElement>) {

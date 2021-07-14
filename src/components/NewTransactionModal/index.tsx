@@ -9,7 +9,8 @@ import { api } from "../../services/api";
 interface NewTransactionModalProps {
     isOpenModal: boolean,
     onRequestCloseModal: () => void
-}
+};
+
 export function NewTransactionModal({isOpenModal,onRequestCloseModal}:NewTransactionModalProps) {
     const [transactionType, setTrasactionType] = useState("");
     const [newTransaction, setNewTransaction] = useState({}); 

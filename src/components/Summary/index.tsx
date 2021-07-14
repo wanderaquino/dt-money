@@ -9,7 +9,6 @@ import { TransactionsContext } from "../../TransactionsContext";
 export function Summary () {
 
     const transactions = useContext(TransactionsContext);
-    
     return (
         <SummaryContainer>
             <div>

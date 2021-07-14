@@ -35,7 +35,3 @@ export const TransactionsContainer = styled.div `
     }
     .
 `
-
-export const TransactionItem = styled.tr `
-
-`

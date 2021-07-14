@@ -19,7 +19,7 @@ interface Transaction {
     createdAt: string
 }
 
-type TransactionInput = Omit<Transaction, "id">;
+type TransactionInput = Omit<Transaction, "id" | "createdAt">;
 
 export const TransactionsContext = createContext<TransactionsContextData>({} as TransactionsContextData);
 export function TransactionsProvider ({children}: TransactionsProviderProps) {

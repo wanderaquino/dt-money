@@ -1,5 +1,5 @@
 import { NewTransactionModalContainer, TransactionTypeContainer, TransactionTypeButton } from "./style";
-import {TransactionsContext} from "../../TransactionsContext";
+import {useTransactions} from "../../hooks/useTransactions";
 import Modal from "react-modal";
 import closeImg from "../../assets/images/close.svg";
 import incomeImg from "../../assets/images/entradas.svg";
@@ -29,7 +29,7 @@ const defaultState = {
 export function NewTransactionModal({isOpenModal,onRequestCloseModal}:NewTransactionModalProps) {
     const [transactionType, setTrasactionType] = useState("");
     const [newTransaction, setNewTransaction] = useState<Transaction>({} as Transaction); 
-    const {createTransaction} = useContext(TransactionsContext);
+    const {createTransaction} = useTransactions();
 
 
     function handleSelectTransactionType (e: MouseEvent<HTMLButtonElement>){
